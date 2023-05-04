@@ -1,0 +1,175 @@
+.navbar {
+    background-color: black;
+    color: #fff;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: transform 0.3s ease-in-out;
+    /* additional styles for your navbar */
+  }
+  
+  .navbar--hidden {
+    transform: translateY(-15%);
+  }
+
+  /* hide the checkbox for the hamburger menu */
+ input[type="checkbox"].hamburger-menu {
+    display: none;
+  }
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  @media screen and (min-width: 769px) {
+    nav a {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    nav a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #2D4D0E;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #2D4D0E;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    nav a:hover {
+      transform: translateY(-3px);
+    }
+    
+    nav a:hover::before {
+      transform: scaleX(1);
+    }
+    
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+    
+    
+  }
+
+  @media screen and (max-width: 768px) {
+    /* hide navigation links by default */
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #333;
+        transition: all 0.3s ease-in-out;
+      }
+    
+      /* hide the checkbox for the hamburger menu */
+      .hamburger-menu {
+        display: none;
+      }
+    
+      /* show navigation links when hamburger menu is clicked */
+      #menu-toggle:checked ~ ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: absolute;
+        top: 4.5rem;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        transform: translateY(-100%);
+      }
+    
+      /* style the hamburger menu label */
+      .hamburger-menu-label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        padding: 1rem;
+        z-index: 1;
+      }
+    
+      .hamburger-menu-icon {
+        display: block;
+        position: relative;
+        height: 2rem;
+        width: 2rem;
+        border-top: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        z-index: 1;
+      }
+    
+      .hamburger-menu-icon::before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background-color: #fff;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: -1;
+        transition: all 0.3s ease-in-out;
+      }
+    
+      /* rotate the hamburger menu icon when clicked */
+      #menu-toggle:checked + .hamburger-menu-label .hamburger-menu-icon {
+        transform: rotate(45deg);
+        transition: transform 0.3s ease-in-out;
+      }
+    
+      #menu-toggle:checked + .hamburger-menu-label .hamburger-menu-icon::before {
+        transform: rotate(90deg);
+        transition: transform 0.3s ease-in-out;
+      }
+    
+      /* slide down the navigation menu when clicked */
+      #menu-toggle:checked ~ ul {
+        transform: translateY(0);
+      }
+    
+      /* center the navigation items */
+      #menu-toggle:checked ~ ul li {
+        margin: 1rem 0;
+      }
+  }
