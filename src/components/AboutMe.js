@@ -10,10 +10,10 @@ function AboutMe() {
         <img src={photo1} alt="Photo 1" className="photo1" />
         <img src={photo2} alt="Photo 2" className="photo2" />
       </div>
-      <div className="skew-container">
+      {/* <div className="skew-container">
         <div id="skew" />
         <div className="skew" />
-      </div>
+      </div> */}
       <div className="about-me-text">
         <h2>About Me</h2>
         <p>I am a litigation lawyer and business consultant with a passion for helping clients navigate complex legal and
