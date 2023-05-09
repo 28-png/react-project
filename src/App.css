@@ -44,7 +44,6 @@
   .services {
     padding: 5rem 0;
     background-color: #BC9F70;
-    margin-top: 50px;
   }
   
   .services h2 {
@@ -79,6 +78,26 @@
     font-size: 1.2rem;
     margin-bottom: 2rem;
   }
+
+  .mission-container {
+    padding: 50px;
+    background: linear-gradient(to bottom, #eaeaea, #ffffff);
+  }
+  
+  .mission-container h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .mission-container p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
   
   
  /* styles for screens 768px and below */

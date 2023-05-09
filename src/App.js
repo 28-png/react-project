@@ -1,12 +1,22 @@
 import './App.css';
-import Navbar from './components/Navbar'
-import AboutMe from './components/AboutMe'
+// import { Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import AboutMe from './components/AboutMe';
+// import About from './components/About';
+// import Contact from './components/Contact';
+// import Services from './components/Services';
 
 function App() {
 
   return (
     <div className="App">
       <Navbar/>
+      {/* <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/services" component={Services} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+        </Switch> */}
       
       <main>
         <section className="hero">
@@ -16,6 +26,11 @@ function App() {
             <button>Learn More</button>
           </div>
         </section>
+
+        <div className="mission-container">
+        <h2>Our Mission</h2>
+        <p>Our mission is to empower individuals and organizations to achieve their full potential through innovative solutions and exceptional service. We believe in building strong, long-lasting relationships with our clients and partners, and strive to create a culture of collaboration and continuous improvement. With a focus on integrity, excellence, and innovation, we are committed to delivering measurable results and making a positive impact in the communities we serve.</p>
+      </div>
         <AboutMe/>
         <section className="services">
           <div className="container">

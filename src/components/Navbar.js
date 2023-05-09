@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
+// import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -8,6 +9,7 @@ function Navbar() {
     function handleMenuClick() {
       setShowMenu(!showMenu);
     }
+    
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ function Navbar() {
             <div className="hamburger-menu-icon"></div>
           </label>
           <ul>
-            <li><a href="#">Home</a></li>
+          <li><a href="#">Home</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
