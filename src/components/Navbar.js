@@ -36,8 +36,10 @@ function Navbar() {
           </label>
           <ul>
           <li><a href="#">Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">About</a></li>
+          <li><a href="#">About Us</a></li>
+            <li><a href="#">Attorney Profile</a></li>
+            <li><a href="#">How we Help</a></li>
+            <li><a href="#">Client Testimonials</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
     </nav>
