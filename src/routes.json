@@ -1,0 +1,19 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/sendemail",
+      "handler": "sendEmail"
+    },
+    {
+      "method": "POST",
+      "path": "/sendtext",
+      "handler": "sendText"
+    },
+    {
+      "method": "GET",
+      "path": "/contacts",
+      "handler": "getContacts"
+    }
+  ]
+}

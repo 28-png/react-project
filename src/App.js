@@ -1,22 +1,19 @@
 import './App.css';
-// import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import AboutMe from './components/AboutMe';
-// import About from './components/About';
-// import Contact from './components/Contact';
-// import Services from './components/Services';
+import Contact from './components/Contact';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 
   return (
+    <BrowserRouter>
     <div className="App">
       <Navbar/>
-      {/* <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/services" component={Services} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-        </Switch> */}
+
+      <Routes>
+      <Route path="/contact" element={<Contact />} />
+      </Routes>
       
       <main>
         <section className="hero">
@@ -52,8 +49,11 @@ function App() {
           </div>
         </section>
       </main>
+      
      
-    </div>);
+    </div>
+    </BrowserRouter>
+    );
 }
 
 export default App;

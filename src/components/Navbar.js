@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -35,12 +35,12 @@ function Navbar() {
             <div className="hamburger-menu-icon"></div>
           </label>
           <ul>
-          <li><a href="#">Home</a></li>
+          <li><Link to="/">Home</Link></li>
           <li><a href="#">About Us</a></li>
             <li><a href="#">Attorney Profile</a></li>
             <li><a href="#">How we Help</a></li>
             <li><a href="#">Client Testimonials</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
     </nav>
   );
