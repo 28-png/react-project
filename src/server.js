@@ -35,12 +35,14 @@ app.post('/sendemail', async (req, res) => {
     to: process.env.EMAIL_ADDRESS,
     subject: 'New message from website contact form',
     html: `
-      <p>Name: ${name}</p>
-      <p>Phone: ${phone}</p>
-      <p>Message: ${message}</p>
+    <div style="background-color: #F4F4F4; padding: 20px; border-radius: 10px; font-family: 'Open Sans', sans-serif;">
+      <p style="font-size: 16px; margin-bottom: 10px;">Name: ${name}</p>
+      <p style="font-size: 16px; margin-bottom: 10px;">Phone: ${phone}</p>
+      <p style="font-size: 16px; margin-bottom: 20px;">Message: ${message}</p>
       <button style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px;" onclick="accept()">Accept</button>
       <button style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px;" onclick="deny()">Deny</button>
-    `
+    </div>
+  `
   };
 
 //   <script>

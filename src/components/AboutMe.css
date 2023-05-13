@@ -14,7 +14,7 @@
 }
 
 .skew {
-  background: #BC9F70;
+  background-color: rgba(188, 159, 112, 0.5);
   position: absolute;
   top: 7%;
   right: -4%;

@@ -43,7 +43,8 @@
 
   .services {
     padding: 5rem 0;
-    background-color: #BC9F70;
+    background-color: rgba(188, 159, 112, 0.5);
+    ;
   }
   
   .services h2 {
