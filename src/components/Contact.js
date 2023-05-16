@@ -10,11 +10,9 @@ function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, email) => {
     event.preventDefault();
     setFormSubmitted(true);
-    console.log('handleSubmit called');
-    event.preventDefault();
     axios({
       method: 'post', 
       url: 'http://localhost:3001/sendemail',
@@ -23,7 +21,7 @@ function Contact() {
         name: name,
         phone: phone,
         message: message,
-        email: 'murphy.d.matthew28@gmail.com' // replace with your email
+        email: email
       }
     }).then(response => {
       if (response.status === 200 && response.data.success) {
@@ -34,31 +32,7 @@ function Contact() {
     }).catch(error => {
       setEmailSent(false);
     })
-    // .then(response => {
-    //   if (response.data.success) {
-    //     setEmailSent(true);
-    //     axios({
-    //       method: 'post',
-    //       url: 'http://localhost:3001/sendtext',
-    //       headers: { 'content-type': 'application/json' },
-    //       data: {
-    //         phone: phone,
-    //         message: 'You have been accepted as a client. Please call us at (123) 456-7890 to schedule an appointment.'
-    //       }
-    //     });
-    //   } else {
-    //     setEmailSent(false);
-    //     axios({
-    //       method: 'post',
-    //       url: 'http://localhost:3001/sendtext',
-    //       headers: { 'content-type': 'application/json' },
-    //       data: {
-    //         phone: phone,
-    //         message: 'We are not taking on any new clients at this time.'
-    //       }
-    //     });
-    //   }
-    // })
+
     .catch(error => {
       setEmailSent(false);
     });
