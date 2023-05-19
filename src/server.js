@@ -86,10 +86,11 @@ app.get('/sendsms/:status/:phone', async (req, res) => {
     await sendSms(status, phone);
     console.log('SMS sent');
 
-    res.redirect('http://localhost:3000/');
+    res.redirect('http://localhost:3000/success');
   } catch (error) {
     console.error(error);
     // Redirect the website host to an error page
+    alert('Failed to send message. Please try again.');
     res.redirect('http://localhost:3000/contact');
   }
 });
