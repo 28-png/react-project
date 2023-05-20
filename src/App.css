@@ -4,6 +4,16 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
   }
+
+  .container-to-hide {
+    display: none;
+  }
+  
+  .hide .container-to-hide {
+    display: block;
+  }
+  
+  
   
   .hero {
     background-image: url('https://source.unsplash.com/1600x900/?lawyer,office');
