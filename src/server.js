@@ -62,11 +62,50 @@ app.post('/sendemail', async (req, res) => {
         <p style="font-size: 16px; margin-bottom: 10px;">Name: ${name}</p>
         <p style="font-size: 16px; margin-bottom: 10px;">Phone: ${phone}</p>
         <p style="font-size: 16px; margin-bottom: 20px;">Message: ${message}</p>
-        <a href="http://localhost:3001/sendsms/accepted/${phone}" style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Accept</a>
-        <a href="http://localhost:3001/sendsms/denied/${phone}" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Deny</a>
+        <a href="#" onclick="handleAccept('${phone}')" style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Accept</a>
+        <a href="#" onclick="handleDeny('${phone}')" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Deny</a>
       </div>
+      <script>
+        function handleAccept(phone) {
+          fetch('http://localhost:3001/sendsms/accepted/' + phone)
+            .then(() => {
+              alert('Accept action performed');
+            })
+            .catch((error) => {
+              console.error(error);
+              alert('Failed to send message. Please try again.');
+            });
+        }
+  
+        function handleDeny(phone) {
+          fetch('http://localhost:3001/sendsms/denied/' + phone)
+            .then(() => {
+              alert('Deny action performed');
+            })
+            .catch((error) => {
+              console.error(error);
+              alert('Failed to send message. Please try again.');
+            });
+        }
+      </script>
     `,
   };
+  
+
+  // const mailOptions = {
+  //   from: email,
+  //   to: process.env.EMAIL_ADDRESS,
+  //   subject: 'New message from website contact form',
+  //   html: `
+  //     <div style="background-color: #F4F4F4; padding: 20px; border-radius: 10px; font-family: 'Open Sans', sans-serif;">
+  //       <p style="font-size: 16px; margin-bottom: 10px;">Name: ${name}</p>
+  //       <p style="font-size: 16px; margin-bottom: 10px;">Phone: ${phone}</p>
+  //       <p style="font-size: 16px; margin-bottom: 20px;">Message: ${message}</p>
+  //       <a href="http://localhost:3001/sendsms/accepted/${phone}" style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Accept</a>
+  //       <a href="http://localhost:3001/sendsms/denied/${phone}" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Deny</a>
+  //     </div>
+  //   `,
+  // };
 
   try {
     const info = await transporter.sendMail(mailOptions);

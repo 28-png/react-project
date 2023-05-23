@@ -9,7 +9,7 @@
     display: none;
   }
   
-  .hide .container-to-hide {
+  .hide.container-to-hide {
     display: block;
   }
   
