@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Services from './components/Services';
@@ -7,21 +6,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PopupBox from './PopupBox';
 
 function App() {
-  const [isSuccessPageVisible, setIsSuccessPageVisible] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 
-  const handleSuccessPage = () => {
-    handlePopupOpen('Success! Your message has been sent.');
-  };
-  
-
   const handlePopupClose = () => {
-    setIsSuccessPageVisible(false);
+    setIsPopupVisible(false);
   };
 
   const handlePopupOpen = (message) => {
     setPopupMessage(message);
-    setIsSuccessPageVisible(true);
+    setIsPopupVisible(true);
   };
 
   return (
@@ -31,14 +25,14 @@ function App() {
         <Routes>
           <Route
             path="/contact"
-            element={<Contact handleSuccessPage={handleSuccessPage} handlePopupOpen={handlePopupOpen} />}
+            element={<Contact handlePopupOpen={handlePopupOpen} />}
           />
         </Routes>
-        {isSuccessPageVisible && (
+        {isPopupVisible && (
           <PopupBox message={popupMessage} onClose={handlePopupClose} />
         )}
         <Services />
-          </div>
+      </div>
     </BrowserRouter>
   );
 }
