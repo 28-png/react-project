@@ -36,11 +36,11 @@ const Contact = ({ handlePopupOpen }) => {
       });
 
       if (response.data.success) {
-        handlePopupOpen('Email sent! Please check your inbox for further instructions.');
+        handlePopupOpen('Email sent! Please check your inbox.');
 
-        setName('');
-      setPhone('');
-      setMessage('');
+          setName('');
+          setPhone('');
+          setMessage('');
       } else {
         handlePopupOpen('Failed to send message. Please try again.');
       }
