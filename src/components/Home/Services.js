@@ -36,11 +36,22 @@ function Services() {
               </div>
               <div className="service-item">
                 <h3>Business Consultation</h3>
-                <p>We provide business consultation services to help individuals and companies make informed decisions about their business operations.</p>
+                <p>We can assist your business in the following areas:</p>
+                <ul>
+                  <li>Regulatory Compliance</li>
+                  <li>Risk management</li>
+                  <li>Business Contracts</li>
+                </ul>
               </div>
               <div className="service-item">
                 <h3>Contract Review</h3>
-                <p>We provide contract review services to help individuals and companies understand the terms and conditions of their contracts.</p>
+                <p>We review and draft an array of contracts including but not limited to:</p>
+                <ul>
+                  <li>Employment Contracts</li>
+                  <li>Technology Contracts</li>
+                  <li>Non-disclosure Agreements (NDA)</li>
+                  <li>Liability Waivers</li>
+                </ul>
               </div>
             </div>
           </div>
