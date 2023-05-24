@@ -35,13 +35,38 @@ function Navbar() {
             <div className="hamburger-menu-icon"></div>
           </label>
           <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><a href="#">About Us</a></li>
-            <li><a href="#">Attorney Profile</a></li>
-            <li><a href="#">How we Help</a></li>
-            <li><a href="#">Client Testimonials</a></li>
-            <li><Link to="/contact">Contact</Link></li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <a href="#">About Us</a>
+        </li>
+        <li>
+          <a href="#">Attorney Profile</a>
+        </li>
+        <li className="dropdown">
+          <a href="#" className="dropdown-toggle">
+            How We Help
+          </a>
+          <ul className="dropdown-menu">
+            <li>
+              <Link to="/legal-consultation">Legal Consultation</Link>
+            </li>
+            <li>
+              <Link to="/business-consultation">Business Consultation</Link>
+            </li>
+            <li>
+              <Link to="/contract-review">Contract Review</Link>
+            </li>
           </ul>
+        </li>
+        <li>
+          <a href="#">Client Testimonials</a>
+        </li>
+        <li>
+          <Link to="/contact">Contact</Link>
+        </li>
+      </ul>
     </nav>
   );
 }
