@@ -40,7 +40,7 @@ const sendSms = (status, phone) => {
   if (status === 'accepted') {
     messageBody = 'Thank you for reaching out to NCL Consulting LLC. After reviewing your information, we \nbelieve we can help you. Please schedule a 30 minute free consultation.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
   } else if (status === 'denied') {
-    messageBody = 'Thank you for reaching out to NCL Consulting LLC. At this time, we are either not accepting\nnew clients or we do not believe that we can help you. Please do not hesitate to contact us at a\nlater date or if another matter arises. We look forward to working with you in the future.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
+    messageBody = 'Thank you for reaching out to NCL Consulting LLC. At this time, we are either not accepting new clients or we do not believe that we can help you. Please do not hesitate to contact us at a later date or if another matter arises. We look forward to working with you in the future.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
   }
 
   return client.messages
@@ -71,8 +71,8 @@ app.post('/sendemail', async (req, res) => {
         <p style="font-size: 16px; margin-bottom: 10px;">Name: ${name}</p>
         <p style="font-size: 16px; margin-bottom: 10px;">Phone: ${phone}</p>
         <p style="font-size: 16px; margin-bottom: 20px;">Message: ${message}</p>
-        <a href="http://localhost:3001/sendsms/${acceptToken}/${phone}" style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Accept</a>
-        <a href="http://localhost:3001/sendsms/${denyToken}/${phone}" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none;">Deny</a>
+        <a href="http://localhost:3001/sendsms/${acceptToken}/${phone}" style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; margin: 25px;">Accept</a>
+        <a href="http://localhost:3001/sendsms/${denyToken}/${phone}" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; margin: 25px;">Deny</a>
       </div>
     `,
   };
