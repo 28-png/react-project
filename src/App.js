@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Services from './components/Services';
-import Contact from './components/Contact';
+import Navbar from './components/Home/Navbar';
+import Services from './components/Home/Services';
+import Contact from './components/ContactAndServer/Contact';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PopupBox from './PopupBox';
+import PopupBox from './components/ContactAndServer/PopupBox';
 
 function App() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);

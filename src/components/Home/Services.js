@@ -15,7 +15,12 @@ function Services() {
 
             <div className="mission-container">
               <h2>Our Mission</h2>
-              <p>Our mission is to empower individuals and organizations to achieve their full potential through innovative solutions and exceptional service. We believe in building strong, long-lasting relationships with our clients and partners, and strive to create a culture of collaboration and continuous improvement. With a focus on integrity, excellence, and innovation, we are committed to delivering measurable results and making a positive impact in the communities we serve.</p>
+              <p>Our firm values the attorney-client relationship. We believe in transparency and honesty so that
+our clients feel empowered when making decisions. We believe in educating our clients on the
+pros and cons of their business or legal issue. We believe in being overly communicative to
+avoid miscommunication. We believe in working closely with clients to mitigate risks and create
+optimal solutions. Overall, we aim to provide a safe space where our clients feel heard, seen, and
+understood.</p>
             </div>
 
             <AboutMe />
@@ -26,7 +31,12 @@ function Services() {
                 <div className="service-items">
                   <div className="service-item">
                     <h3>Legal Consultation</h3>
-                    <p>We provide legal consultation services to help individuals and companies understand their legal rights and obligations.</p>
+                    <p>Our practice areas include:</p>
+                    <ul>
+                      <li>Federal Products Liability Litigation</li>
+                      <li>Federal Civil Rights Law</li>
+                      <li>Labor and Employment</li>
+                    </ul>
                   </div>
                   <div className="service-item">
                     <h3>Business Consultation</h3>
