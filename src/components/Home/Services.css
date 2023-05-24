@@ -37,7 +37,6 @@
   .services {
     padding: 5rem 0;
     background-color: rgba(188, 159, 112, 0.5);
-    ;
   }
   
   .services h2 {
@@ -54,11 +53,10 @@
     gap: 3rem;
     margin-top: 3rem;
   }
-
+  
   ul {
     display: flex;
-    /* flex-wrap: wrap; */
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     gap: 2rem;
   }
@@ -69,6 +67,12 @@
     background-color: white;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     text-align: center;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .service-item:hover {
+    transform: translateY(-5px);
   }
   
   .service-item h3 {
@@ -80,6 +84,7 @@
     font-size: 1.2rem;
     margin-bottom: 2rem;
   }
+  
 
   .mission-container {
     padding: 50px;
