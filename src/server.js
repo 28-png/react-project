@@ -38,9 +38,9 @@ const sendSms = (status, phone) => {
   let messageBody = '';
 
   if (status === 'accepted') {
-    messageBody = 'We will take you on as a client.';
+    messageBody = 'Thank you for reaching out to NCL Consulting LLC. After reviewing your information, we \nbelieve we can help you. Please schedule a 30 minute free consultation.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
   } else if (status === 'denied') {
-    messageBody = 'We are not taking any new clients.';
+    messageBody = 'Thank you for reaching out to NCL Consulting LLC. At this time, we are either not accepting\nnew clients or we do not believe that we can help you. Please do not hesitate to contact us at a\nlater date or if another matter arises. We look forward to working with you in the future.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
   }
 
   return client.messages
@@ -61,8 +61,6 @@ app.post('/sendemail', async (req, res) => {
       pass: process.env.EMAIL_PASSWORD,
     },
   });
-
-
 
   const mailOptions = {
     from: email,
@@ -90,6 +88,8 @@ app.post('/sendemail', async (req, res) => {
   }
 });
 
+// ... (existing code)
+
 app.get('/sendsms/:token/:phone', async (req, res) => {
   const { token, phone } = req.params;
 
@@ -99,26 +99,259 @@ app.get('/sendsms/:token/:phone', async (req, res) => {
       await sendSms('accepted', phone);
       console.log('SMS sent');
 
-      res.json({ success: true, message: 'SMS sent' });
+      res.send(`
+        <html>
+          <head>
+            <style>
+              /* Styles for the success message */
+
+              body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+              }
+
+              .card {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                text-align: center;
+                font-family: 'Arial', sans-serif;
+              }
+
+              .success-icon {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: #4CAF50;
+                color: #fff;
+                font-size: 60px;
+                line-height: 100px;
+              }
+
+              .success-icon svg {
+                vertical-align: middle;
+              }
+            </style>
+            <script>
+              window.onload = function() {
+                window.opener.postMessage({ success: true }, "*");
+              };
+            </script>
+          </head>
+          <body>
+            <div class="card">
+              <div class="success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h1>SMS sent successfully!</h1>
+              <p>You can close this window.</p>
+            </div>
+          </body>
+        </html>
+      `);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ success: false, message: 'Failed to send SMS' });
+      res.send(`
+        <html>
+          <head>
+            <style>
+              /* Styles for the error message */
+
+              body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+              }
+
+              .card {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                text-align: center;
+                font-family: 'Arial', sans-serif;
+              }
+
+              .error-icon {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: #FF5722;
+                color: #fff;
+                font-size: 60px;
+                line-height: 100px;
+              }
+
+              .error-icon svg {
+                vertical-align: middle;
+              }
+            </style>
+            <script>
+              window.onload = function() {
+                window.opener.postMessage({ error: true }, "*");
+              };
+            </script>
+          </head>
+          <body>
+            <div class="card">
+              <div class="error-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12" y2="16"></line>
+                </svg>
+              </div>
+              <h1>Failed to send SMS</h1>
+              <p>Please try again.</p>
+            </div>
+          </body>
+        </html>
+      `);
     }
   } else if (token === denyToken) {
     try {
       await sendSms('denied', phone);
       console.log('SMS sent');
 
-      res.json({ success: true, message: 'SMS sent' });
+      res.send(`
+        <html>
+          <head>
+            <style>
+              /* Styles for the deny message */
+
+              body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+              }
+
+              .card {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                text-align: center;
+                font-family: 'Arial', sans-serif;
+              }
+
+              .deny-icon {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: #FF5722;
+                color: #fff;
+                font-size: 60px;
+                line-height: 100px;
+              }
+
+              .deny-icon svg {
+                vertical-align: middle;
+              }
+            </style>
+            <script>
+              window.onload = function() {
+                window.opener.postMessage({ success: true }, "*");
+              };
+            </script>
+          </head>
+          <body>
+            <div class="card">
+              <div class="deny-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+              <h1>SMS denied successfully!</h1>
+              <p>You can close this window.</p>
+            </div>
+          </body>
+        </html>
+      `);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ success: false, message: 'Failed to send SMS' });
+      res.send(`
+        <html>
+          <head>
+            <style>
+              /* Styles for the error message */
+
+              body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+              }
+
+              .card {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                text-align: center;
+                font-family: 'Arial', sans-serif;
+              }
+
+              .error-icon {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: #FF5722;
+                color: #fff;
+                font-size: 60px;
+                line-height: 100px;
+              }
+
+              .error-icon svg {
+                vertical-align: middle;
+              }
+            </style>
+            <script>
+              window.onload = function() {
+                window.opener.postMessage({ error: true }, "*");
+              };
+            </script>
+          </head>
+          <body>
+            <div class="card">
+              <div class="error-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12" y2="16"></line>
+                </svg>
+              </div>
+              <h1>Failed to send SMS</h1>
+              <p>Please try again.</p>
+            </div>
+          </body>
+        </html>
+      `);
     }
   } else {
     // Invalid token
     res.status(400).json({ success: false, message: 'Invalid token' });
   }
 });
+
+
+
+
 
 
 

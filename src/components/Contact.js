@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Contact.css';
 
 const Contact = ({ handlePopupOpen }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      const { success, error } = event.data;
+
+      if (success) {
+        handlePopupOpen('Success! Your message has been sent.');
+      } else if (error) {
+        handlePopupOpen('Failed to send message. Please try again.');
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, [handlePopupOpen]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,13 +31,16 @@ const Contact = ({ handlePopupOpen }) => {
     try {
       const response = await axios.post('http://localhost:3001/sendemail', {
         name,
-        email,
         phone,
         message,
       });
 
       if (response.data.success) {
-        handlePopupOpen('Success! Your message has been sent.');
+        handlePopupOpen('Email sent! Please check your inbox for further instructions.');
+
+        setName('');
+      setPhone('');
+      setMessage('');
       } else {
         handlePopupOpen('Failed to send message. Please try again.');
       }
@@ -40,14 +60,6 @@ const Contact = ({ handlePopupOpen }) => {
           placeholder="Your Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
