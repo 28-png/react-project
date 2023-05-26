@@ -5,6 +5,7 @@ import Contact from './components/ContactAndServer/Contact';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PopupBox from './components/ContactAndServer/PopupBox';
 
+
 function App() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');

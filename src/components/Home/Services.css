@@ -70,6 +70,16 @@
     border-radius: 0.5rem;
     transition: transform 0.3s ease;
   }
+
+  .service-item .service-details {
+    display: none;
+  }
+  
+  .service-item.expanded .service-details {
+    display: block;
+  }
+  
+  
   
   .service-item:hover {
     transform: translateY(-5px);
