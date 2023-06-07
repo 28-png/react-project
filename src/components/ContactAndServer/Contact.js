@@ -77,7 +77,7 @@ const Contact = ({ handlePopupOpen }) => {
           onChange={(e) => setMessage(e.target.value)}
           required
         ></textarea>
-        <button type="submit">Send Message</button>
+        <button className="p-2 px-4 bg-blue-500 text-white rounded cursor-pointer" type="submit">Send Message</button>
       </form>
     </div>
   );

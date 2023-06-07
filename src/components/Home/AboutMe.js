@@ -20,8 +20,8 @@ across the United States and international businesses incorporated in the United
       </div>
       </div>
       <div className="skew-container">
-        <div id="skew" />
-        <div className="skew" />
+        <div id="skew2" />
+        <div className="skew2" />
       </div>
     </div>
   );

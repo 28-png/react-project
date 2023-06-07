@@ -43,23 +43,29 @@ const text = {
 
 const InitialTransition = () => {
   return (
-    <div style={{ position: "absolute", inset: 0, alignItems: "center", justifyContent: "center" }}>
+    <div className="inset-0 flex items-center justify-center">
       <motion.div
-        style={{ position: "relative", zIndex: 100000, width: "100%", background: "#000" }}
+        className="absolute flex items-center justify-center w-full bg-black"
+        style={{zIndex: 100000}}
         initial="initial"
         animate="animate"
         variants={blackBox}
+        onAnimationStart={() => document.body.classList.add("overflow-hidden")}
+  onAnimationComplete={() =>
+    document.body.classList.remove("overflow-hidden")
+  }
       >
-        <motion.svg variants={textContainer} style={{ position: "absolute", zIndex: 100000, display: "flex" }}>
-          <pattern id="pattern" patternUnits="userSpaceOnUse" width={750} height={800} style={{ fill: "currentcolor" }}>
-            <rect style={{ width: "100%", height: "100%", fill: "currentcolor" }} />
-            <motion.rect variants={text} style={{ width: "100%", height: "100%", fill: "#757575" }} />
+        <motion.svg variants={textContainer} className="absolute z-50 flex">
+          <pattern id="pattern" patternUnits="userSpaceOnUse" width={750} height={800} className="text-white">
+            <rect className="w-full h-full fill-current" />
+            <motion.rect variants={text} className="w-full h-full text-gray-600 fill-current" />
           </pattern>
           <text
+            className="text-4xl font-bold"
             textAnchor="middle"
             x="50%"
             y="50%"
-            style={{ fill: "url(#pattern)", fontSize: "2.25", lineHeight: "2.5", fontWeight: "bold" }}
+            style={{ fill: "url(#pattern)" }}
           >
             NCL
           </text>
