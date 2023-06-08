@@ -38,7 +38,7 @@ const sendSms = (status, phone) => {
   let messageBody = '';
 
   if (status === 'accepted') {
-    messageBody = 'Thank you for reaching out to NCL Consulting LLC. After reviewing your information, we \nbelieve we can help you. Please schedule a 30 minute free consultation.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
+    messageBody = 'Thank you for reaching out to NCL Consulting LLC. After reviewing your information, we believe we can help you. Please schedule a 30 minute free consultation.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC\n312-620-6103';
   } else if (status === 'denied') {
     messageBody = 'Thank you for reaching out to NCL Consulting LLC. At this time, we are either not accepting new clients or we do not believe that we can help you. Please do not hesitate to contact us at a later date or if another matter arises. We look forward to working with you in the future.\n\nBest,\n\nNaphtalia C. Lafontant, Esq.\nNCL Consulting LLC';
   }

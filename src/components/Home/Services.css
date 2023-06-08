@@ -56,11 +56,10 @@ button:hover {
 }
 
 .service-item {
-  flex-basis: 30rem;
-  padding: 2rem;
-  background-color: white;
+  padding: .5rem;
+  background-color: beige;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  text-align: center;
+  /* text-align: center; */
   border-radius: 0.5rem;
   transition: transform 0.3s ease;
   position: relative;
@@ -108,16 +107,6 @@ button:hover {
   text-align: justify;
   margin: 0 auto;
   max-width: 800px;
-}
-
-ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border: 5px solid #050A30;
-  border-radius: 0.5rem;
-  padding: 1rem;
 }
 
 /* Styles for screens 768px and below */
