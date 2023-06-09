@@ -4,6 +4,7 @@ import "./Services.css";
 import photo2 from "../../assets/lawyer-img-2.jpg";
 import SlideOverLayer from './SlideOverLayer';
 import BackgroundLayer from './Background';
+import FadeIn from './FadeIn';
 
 function Business() {
     const [show, setShow] = useState(false);
@@ -16,19 +17,6 @@ function Business() {
           {children}
         </button>
         
-      )
-
-      const FadeIn = ({ delay, children }) => (
-        <Transition.Child
-          enter={`transition-all ease-in-out duration-700 ${delay}`}
-          enterFrom="opacity-0 translate-y-6"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition-all ease-in-out duration-300"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          {children}
-        </Transition.Child>
       )
 
     return (

@@ -4,8 +4,9 @@ import "./Services.css";
 import photo1 from "../../assets/lawyer-img.jpg";
 import SlideOverLayer from './SlideOverLayer';
 import BackgroundLayer from './Background';
+import FadeIn from './FadeIn';
 
-function Litigation() {
+function Legal() {
     const [show, setShow] = useState(false);
 
     const Button = ({ children, ...props }) => (
@@ -16,19 +17,6 @@ function Litigation() {
           {children}
         </button>
         
-      )
-
-      const FadeIn = ({ delay, children }) => (
-        <Transition.Child
-          enter={`transition-all ease-in-out duration-700 ${delay}`}
-          enterFrom="opacity-0 translate-y-6"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition-all ease-in-out duration-300"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          {children}
-        </Transition.Child>
       )
 
     return (
@@ -87,4 +75,4 @@ function Litigation() {
     </div>);
 }
 
-export default Litigation;
+export default Legal;

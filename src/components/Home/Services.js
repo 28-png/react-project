@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AboutMe from "./AboutMe";
 import "./Services.css";
-import photo3 from "../../assets/landingpagephoto1.jpg"
 import Legal from "./Legal";
 import Business from "./Business";
 import Contract from "./Contract";
