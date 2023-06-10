@@ -18,7 +18,7 @@ function LegalContentNav({show, setShow}) {
                 </FadeIn>
               <FadeIn delay="delay-[300ms]">
               <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Our practice areas include:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                 <li>Federal Products Liability Litigation</li>
                 <li>Federal Civil Rights Law</li>
                 <li>Labor and Employment</li>
@@ -26,7 +26,7 @@ function LegalContentNav({show, setShow}) {
               </FadeIn>
               <FadeIn delay="delay-[500ms]">
               <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">We also have experience participating in these forums:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                 <li>Department of Labor Relations</li>
                 <li>Mediations</li>
                 <li>Arbitrations</li>
@@ -35,7 +35,7 @@ function LegalContentNav({show, setShow}) {
               </FadeIn>
               <FadeIn delay="delay-[700ms]">
               <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">We are always looking to expand our practice areas. But currently, we do not practice:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                 <li>Family Law</li>
                 <li>Criminal Law</li>
                 <li>Trusts &amp; Estates</li>

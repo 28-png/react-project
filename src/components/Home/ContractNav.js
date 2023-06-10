@@ -18,7 +18,7 @@ function ContractNav({showCont, setCont}) {
             </FadeIn>
             <FadeIn delay="delay-[300ms]">
               <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">We can assist your business in the following areas:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                 <li>Employment Contracts</li>
                 <li>Technology Contracts</li>
                 <li>Non-disclosure Agreements (NDA)</li>

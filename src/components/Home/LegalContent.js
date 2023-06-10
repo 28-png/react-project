@@ -1,4 +1,3 @@
-import { Transition } from '@headlessui/react';
 import SlideOverLayer from './SlideOverLayer';
 import BackgroundLayer from './Background';
 import FadeIn from './FadeIn';
