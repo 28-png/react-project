@@ -1,23 +1,17 @@
-import { Transition } from '@headlessui/react'
+import { Transition } from '@headlessui/react';
 import React, { useState, useEffect } from "react";
 import "./Services.css";
 import photo1 from "../../assets/lawyer-img.jpg";
 import SlideOverLayer from './SlideOverLayer';
 import BackgroundLayer from './Background';
 import FadeIn from './FadeIn';
+import Button from './Button';
+import LegalContent from './LegalContent';
 
 function Legal() {
     const [show, setShow] = useState(false);
 
-    const Button = ({ children, ...props }) => (
-        <button
-        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-5"
-          {...props}
-        >
-          {children}
-        </button>
-        
-      )
+    
 
     return (
         <div>
@@ -31,39 +25,7 @@ function Legal() {
               </div>
               <div className="p-5">
               <Transition.Root show={show}>
-                <BackgroundLayer />
-                <SlideOverLayer>
-              <FadeIn delay="delay-[0ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Our practice areas include:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                <li>Federal Products Liability Litigation</li>
-                <li>Federal Civil Rights Law</li>
-                <li>Labor and Employment</li>
-              </ul>
-              </FadeIn>
-              <FadeIn delay="delay-[300ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">We also have experience participating in these forums:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                <li>Department of Labor Relations</li>
-                <li>Mediations</li>
-                <li>Arbitrations</li>
-                <li>Settlement Conferences</li>
-              </ul>
-              </FadeIn>
-              <FadeIn delay="delay-[500ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">We are always looking to expand our practice areas. But currently, we do not practice:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                <li>Family Law</li>
-                <li>Criminal Law</li>
-                <li>Trusts &amp; Estates</li>
-              </ul>
-              </FadeIn>
-              <div className="my-6">
-            <FadeIn delay="delay-[900ms]">
-              <Button onClick={() => setShow(false)}>Close</Button>
-            </FadeIn>
-          </div>
-              </SlideOverLayer>
+                <LegalContent setShow={setShow} />
               </Transition.Root>
               <Button onClick={() => setShow(!show)} >
             Read more

@@ -5,7 +5,9 @@ import Contact from './components/ContactAndServer/Contact';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PopupBox from './components/ContactAndServer/PopupBox';
 import InitialTransition from './InitialTransition';
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; 
+
+
 
 
 

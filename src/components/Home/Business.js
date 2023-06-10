@@ -1,23 +1,14 @@
-import { Transition } from '@headlessui/react'
+import { Transition } from '@headlessui/react';
 import React, { useState, useEffect } from "react";
 import "./Services.css";
 import photo2 from "../../assets/lawyer-img-2.jpg";
 import SlideOverLayer from './SlideOverLayer';
 import BackgroundLayer from './Background';
 import FadeIn from './FadeIn';
+import Button from './Button';
 
 function Business() {
     const [show, setShow] = useState(false);
-
-    const Button = ({ children, ...props }) => (
-        <button
-        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-5"
-          {...props}
-        >
-          {children}
-        </button>
-        
-      )
 
     return (
 
