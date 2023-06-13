@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PopupBox from './components/ContactAndServer/PopupBox';
 import InitialTransition from './InitialTransition';
 import { motion } from "framer-motion"; 
+import Footer from './components/Home/Footer';
 
 
 
@@ -80,6 +81,7 @@ function App() {
          )}
          <motion.section variants={services}>
          <Services />
+          <Footer />
          </motion.section>
          </div>
    </BrowserRouter>

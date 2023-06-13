@@ -5,6 +5,28 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const twilio = require('twilio');
 const { v4: uuidv4 } = require('uuid');
+const mongoose = require('mongoose');
+const AboutModel = require('./models/About.js');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+const dbpass = process.env.DB_PASSWORD;
+
+app.use(bodyParser.json());
+app.use(cors());
+
+mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mongodb.net/NCL?retryWrites=true&w=majority');
+
+app.get("/", (req, res) => {
+  AboutModel.find({ })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
 dotenv.config();
 
@@ -16,11 +38,7 @@ function generateUniqueToken() {
 const acceptToken = generateUniqueToken();
 const denyToken = generateUniqueToken();
 
-const app = express();
-const PORT = process.env.PORT || 3001;
 
-app.use(bodyParser.json());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');

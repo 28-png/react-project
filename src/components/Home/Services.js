@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 import AboutUs from "./AboutUs";
 import "./Services.css";
 import Legal from "./Legal";
@@ -9,6 +10,13 @@ import TestimonialForm from "./TestimonialForm";
 import TestimonialSection from "./TestimonialSection";
 
 function Services() {
+  const [about, setAbout] = useState([]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/").then((response) => {
+      setAbout(response.data);
+    });
+  }, []);
   
 
   const scrollToServices = () => {
@@ -28,12 +36,14 @@ function Services() {
         </section>
 
         <div className="mission-container">
-          <h2>Our Mission</h2>
-          <p>Our firm values the attorney-client relationship. We believe in transparency and honesty so that 
-            our clients feel empowered when making decisions. We believe in educating our clients on the pros and cons 
-            of their business or legal issue. We believe in being overly communicative to avoid miscommunication. 
-            We believe in working closely with clients to mitigate risks and create optimal solutions. 
-            Overall, we aim to provide a safe space where our clients feel heard, seen, and understood. </p>
+        {about.map((about) => {
+          return (
+            <div>
+              <h2>{about.title}</h2>
+              <p>{about.body}</p>
+            </div>
+          );
+        })}
         </div>
 
         <AboutUs />
