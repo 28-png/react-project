@@ -29,18 +29,23 @@ function Services() {
       <main>
         <section className="hero">
           <div className="container">
-            <h1>Lawyer and Business Consultation Services</h1>
-            <p>We provide legal and business consultation services to help individuals and companies make informed decisions.</p>
+          {about.map((about) => {
+          return (
+            <div>
+              <h1>{about.landingTitle}</h1>
+              <p>{about.landingBody}</p>
+            </div>
+          );
+        })}
             <button onClick={scrollToServices}>Learn More</button>
           </div>
         </section>
-
         <div className="mission-container">
         {about.map((about) => {
           return (
             <div>
-              <h2>{about.title}</h2>
-              <p>{about.body}</p>
+              <h2>{about.missionTitle}</h2>
+              <p>{about.missionBody}</p>
             </div>
           );
         })}
