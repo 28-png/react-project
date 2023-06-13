@@ -1,17 +1,12 @@
 import { Transition } from '@headlessui/react';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Services.css";
 import photo1 from "../../assets/lawyer-img.jpg";
-import SlideOverLayer from './SlideOverLayer';
-import BackgroundLayer from './Background';
-import FadeIn from './FadeIn';
 import Button from './Button';
 import LegalContent from './LegalContent';
 
 function Legal() {
     const [show, setShow] = useState(false);
-
-    
 
     return (
         <div>
