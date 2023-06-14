@@ -17,7 +17,6 @@ function Services() {
       setAbout(response.data);
     });
   }, []);
-  
 
   const scrollToServices = () => {
     const servicesSection = document.getElementById("services-section");
@@ -29,43 +28,39 @@ function Services() {
       <main>
         <section className="hero">
           <div className="container">
-          {about.map((about) => {
-          return (
-            <div>
-              <h1>{about.landingTitle}</h1>
-              <p>{about.landingBody}</p>
-            </div>
-          );
-        })}
+            {about.map((aboutItem) => (
+              <div key={aboutItem._id}>
+                <h1>{aboutItem.landingTitle}</h1>
+                <p>{aboutItem.landingBody}</p>
+              </div>
+            ))}
             <button onClick={scrollToServices}>Learn More</button>
           </div>
         </section>
         <div className="mission-container">
-        {about.map((about) => {
-          return (
-            <div>
-              <h2>{about.missionTitle}</h2>
-              <p>{about.missionBody}</p>
+          {about.map((aboutItem) => (
+            <div key={aboutItem._id}>
+              <h2>{aboutItem.missionTitle}</h2>
+              <p>{aboutItem.missionBody}</p>
             </div>
-          );
-        })}
+          ))}
         </div>
 
-        <AboutUs />
-        <AttorneyProfile />
+        <AboutUs key="about-us" />
+        <AttorneyProfile key="attorney-profile" />
         <section id="services-section" className="services">
           <div className="container">
             <h2>Our Services</h2>
             <div className="service-items">
-            <Legal />
-            <Business />
-            <Contract />
+              <Legal key="legal" />
+              <Business key="business" />
+              <Contract key="contract" />
             </div>
           </div>
-          </section>
+        </section>
       </main>
-      <TestimonialSection />
-      <TestimonialForm />
+      <TestimonialSection key="testimonial-section" />
+      <TestimonialForm key="testimonial-form" />
     </div>
   );
 }

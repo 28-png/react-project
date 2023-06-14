@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Navbar from './components/Home/Navbar';
+import Navbar from './components/Home/Navbar/Navbar';
 import Services from './components/Home/Services';
 import Contact from './components/ContactAndServer/Contact';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PopupBox from './components/ContactAndServer/PopupBox';
-import InitialTransition from './InitialTransition';
+import InitialTransition from './components/Home/Animations/InitialTransition';
 import { motion } from "framer-motion"; 
 import Footer from './components/Home/Footer';
 
@@ -67,7 +67,7 @@ function App() {
       >
      <BrowserRouter>
      <div className="App">
-      <motion.section variants={nav}>
+      <motion.section variants={nav} key="navbar">
        <Navbar />
        </motion.section>
         <Routes>
@@ -79,7 +79,7 @@ function App() {
          {isPopupVisible && (
            <PopupBox message={popupMessage} onClose={handlePopupClose} />
          )}
-         <motion.section variants={services}>
+         <motion.section variants={services} key="services">
          <Services />
           <Footer />
          </motion.section>

@@ -20,15 +20,15 @@ function AboutUs() {
         <img src={photo1} alt="Photo1" className="photo1" />
         <img src={photo2} alt="Photo2" className="photo2" />
         <div className="about-me-text">
-        {about.map((about) => {
+        {about.map((aboutData) => {
           return (
-            <div>
-              <h1>{about.aboutTitle}</h1>
-              <p>{about.aboutBody}</p>
+            <div key={aboutData._id}>
+              <h1>{aboutData.aboutTitle}</h1>
+              <p>{aboutData.aboutBody}</p>
             </div>
           );
         })}
-      </div>
+        </div>
       </div>
       <div className="skew-container">
         <div id="skew2" />

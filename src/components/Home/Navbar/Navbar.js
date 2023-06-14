@@ -55,16 +55,16 @@ function Navbar() {
         <div className="hamburger-menu-icon"></div>
       </label>
       <ul>
-        <li>
+        <li key="home">
           <Link to="/">Home</Link>
         </li>
-        <li>
+        <li key="about-us">
           <a href="#">About Us</a>
         </li>
-        <li>
+        <li key="attorney-profile">
           <a href="#">Attorney Profile</a>
         </li>
-        <li className="dropdown">
+        <li className="dropdown" key="how-we-help">
           <a href="#" className="dropdown-toggle" >
             How We Help
           </a>
