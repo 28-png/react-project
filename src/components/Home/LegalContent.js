@@ -1,9 +1,18 @@
+import { useState, useEffect } from "react";
+import Axios from "axios";
 import SlideOverLayer from './SlideOverLayer';
 import BackgroundLayer from './Background';
 import FadeIn from './FadeIn';
 import Button from './Button';
 
 function LegalContent({show, setShow}) {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/services").then((response) => {
+      setServices(response.data);
+    });
+  }, []);
 
     return (
         <div>
@@ -11,12 +20,19 @@ function LegalContent({show, setShow}) {
             <BackgroundLayer />
                 <SlideOverLayer>
               <FadeIn delay="delay-[0ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Our practice areas include:</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                <li>Federal Products Liability Litigation</li>
-                <li>Federal Civil Rights Law</li>
-                <li>Labor and Employment</li>
-              </ul>
+                
+              {services.map((service) => (
+                <div>
+                  <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+                    {service.legalLiTitle}
+                  </p>
+                  <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                  {JSON.parse(service.legalList).map((item, index) => (
+                    <li key={`${service._id}-${item}-${index}`}>{item}</li>
+                  ))}
+                  </ul>
+                </div>
+              ))}
               </FadeIn>
               <FadeIn delay="delay-[300ms]">
               <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">We also have experience participating in these forums:</p>

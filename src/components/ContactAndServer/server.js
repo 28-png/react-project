@@ -7,6 +7,7 @@ const twilio = require('twilio');
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const AboutModel = require('./models/About.js');
+const ServicesModel = require('./models/Services.js')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -20,6 +21,16 @@ mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mong
 
 app.get("/", (req, res) => {
   AboutModel.find({ })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.get("/services", (req, res) => {
+  ServicesModel.find({ })
     .then((result) => {
       res.json(result);
     })
