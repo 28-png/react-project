@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import React from "react";
 import "./AboutMe.css";
-import photo1 from "../../assets/lawyer-img.jpg";
-import photo2 from "../../assets/lawyer-image3.jpg";
+import photo1 from "../../../assets/lawyer-img.jpg";
+import photo2 from "../../../assets/lawyer-image3.jpg";
 
 function AboutUs() {
   const [about, setAbout] = useState([]);

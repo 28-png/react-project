@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import { Transition } from '@headlessui/react';
 import "./Services.css";
-import photo1 from "../../assets/lawyer-img.jpg";
-import Button from './Animations/Button';
+import photo1 from "../../../assets/lawyer-img.jpg";
+import Button from '../Reusable-Assets/Button';
 import LegalContent from './LegalContent';
 
 function Legal() {

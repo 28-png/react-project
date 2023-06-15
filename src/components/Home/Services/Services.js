@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import AboutUs from "./AboutUs";
+import AboutUs from "../About/AboutUs";
 import "./Services.css";
 import Legal from "./Legal";
 import Business from "./Business";
 import Contract from "./Contract";
-import AttorneyProfile from "./AttorneyProfile";
-import TestimonialForm from "./TestimonialForm";
-import TestimonialSection from "./TestimonialSection";
+import AttorneyProfile from "../About/AttorneyProfile";
+import TestimonialForm from "../Testimonial/TestimonialForm";
+import TestimonialSection from "../Testimonial/TestimonialSection";
 
 function Services() {
   const [about, setAbout] = useState([]);

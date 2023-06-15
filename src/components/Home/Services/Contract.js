@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import Axios from "axios";
 import { Transition } from '@headlessui/react';
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import "./Services.css";
-import photo2 from "../../assets/lawyer-img-2.jpg";
-import SlideOverLayer from './Animations/SlideOverLayer';
-import BackgroundLayer from './Animations/Background';
-import FadeIn from './Animations/FadeIn';
-import Button from './Animations/Button';
+import photo3 from "../../../assets/landingpagephoto1.jpg";
+import SlideOverLayer from '../Animations/SlideOverLayer';
+import BackgroundLayer from '../Reusable-Assets/Background';
+import FadeIn from '../Animations/FadeIn';
+import Button from '../Reusable-Assets/Button';
 
-function Business() {
+function Contract() {
     const [show, setShow] = useState(false);
     const [services, setServices] = useState([]);
 
@@ -21,22 +21,22 @@ function Business() {
     return (
         <div>
             {services.map((service) => (
-                <div key={service._id}>
+            <div key={service._id}>
             <div className={"service-header service-item"}>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <img className="rounded-t-lg" src={photo2} alt="" />
+                    <img className="rounded-t-lg" src={photo3} alt="" />
                     <div className="p-5">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{service.busHeader}</h5>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.busBody}</p>
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{service.contHeader}</h5>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.contBody}</p>
                     </div>
                     <div className="p-5">
-                        <Transition.Root key="business-transition" show={show}>
+                        <Transition.Root key="contract-transition" show={show}>
                             <BackgroundLayer />
                             <SlideOverLayer>
                                 <FadeIn delay="delay-[0ms]">
-                                    <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.busTitle}</p>
+                                    <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.contTitle}</p>
                                     <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                                    {JSON.parse(service.busList).map((list) => (
+                                    {JSON.parse(service.contList).map((list) => (
                                         <li key={list}>{list}</li>
                                     ))}
                                     </ul>
@@ -46,7 +46,6 @@ function Business() {
                                         <Button onClick={() => setShow(false)}>Close</Button>
                                     </FadeIn>
                                 </div>
-                                
                             </SlideOverLayer>
                         </Transition.Root>
                         <Button onClick={() => setShow(!show)} >
@@ -56,12 +55,12 @@ function Business() {
                             </svg>
                         </Button>
                     </div>
-                    </div>
                 </div>
-                </div>
-              ))}
             </div>
+            </div>
+              ))}
+        </div>
     );
 }
 
-export default Business;
+export default Contract;

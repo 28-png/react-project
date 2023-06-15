@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import React from "react";
-import photo from '../../assets/lawyer-img.jpg'
+import photo from '../../../assets/lawyer-img.jpg'
 function AttorneyProfile() {
   const [about, setAbout] = useState([]);
 

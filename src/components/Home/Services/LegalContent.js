@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import SlideOverLayer from './Animations/SlideOverLayer';
-import BackgroundLayer from './Animations/Background';
-import FadeIn from './Animations/FadeIn';
-import Button from './Animations/Button';
+import SlideOverLayer from '../Animations/SlideOverLayer';
+import BackgroundLayer from '../Reusable-Assets/Background';
+import FadeIn from '../Animations/FadeIn';
+import Button from '../Reusable-Assets/Button';
 
 function LegalContent({show, setShow}) {
   const [services, setServices] = useState([]);
