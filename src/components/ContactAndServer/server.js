@@ -7,7 +7,8 @@ const twilio = require('twilio');
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const AboutModel = require('./models/About.js');
-const ServicesModel = require('./models/Services.js')
+const ServicesModel = require('./models/Services.js');
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -16,8 +17,10 @@ const dbpass = process.env.DB_PASSWORD;
 
 app.use(bodyParser.json());
 app.use(cors());
-
+    
 mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mongodb.net/NCL?retryWrites=true&w=majority');
+
+
 
 app.get("/", (req, res) => {
   AboutModel.find({ })
@@ -38,6 +41,8 @@ app.get("/services", (req, res) => {
       res.json(err);
     });
 });
+
+
 
 dotenv.config();
 
