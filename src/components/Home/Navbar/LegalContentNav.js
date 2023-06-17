@@ -22,12 +22,12 @@ function LegalContentNav({show, setShow}) {
                     <div key={service._id}>
                 <FadeIn delay="delay-[0ms]">
                 <div className="p-5">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{service.legalHeader}</h5>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-600">{service.legalHeader}</h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.legalBody}</p>
               </div>
                 </FadeIn>
               <FadeIn delay="delay-[300ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.legalTitle}</p>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle}</p>
               <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
               {JSON.parse(service.legalList).map((list) => (
                     <li key={list}>{list}</li>
@@ -35,7 +35,7 @@ function LegalContentNav({show, setShow}) {
               </ul>
               </FadeIn>
               <FadeIn delay="delay-[500ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.legalTitle2}</p>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle2}</p>
               <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
               {JSON.parse(service.legalList2).map((list2) => (
                 <li key={list2}>{list2}</li>
@@ -43,7 +43,7 @@ function LegalContentNav({show, setShow}) {
               </ul>
               </FadeIn>
               <FadeIn delay="delay-[700ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.legalTitle3}</p>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle3}</p>
               <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
               {JSON.parse(service.legalList3).map((list3) => (
                 <li key={list3}>{list3}</li>

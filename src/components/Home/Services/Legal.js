@@ -5,7 +5,6 @@ import "./Services.css";
 import photo1 from "../../../assets/lawyer-img.jpg";
 import Button from '../Reusable-Assets/Button';
 import LegalContent from './LegalContent';
-
 function Legal() {
     const [show, setShow] = useState(false);
     const [services, setServices] = useState([]);

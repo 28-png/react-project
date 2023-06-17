@@ -59,7 +59,6 @@ button:hover {
   padding: .5rem;
   background-color: beige;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  /* text-align: center; */
   border-radius: 0.5rem;
   transition: transform 0.3s ease;
   position: relative;

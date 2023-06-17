@@ -34,7 +34,7 @@ function Business() {
                             <BackgroundLayer />
                             <SlideOverLayer>
                                 <FadeIn delay="delay-[0ms]">
-                                    <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.busTitle}</p>
+                                    <p className="mb-2 text-lg font-semibold text-gray-900">{service.busTitle}</p>
                                     <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
                                     {JSON.parse(service.busList).map((list) => (
                                         <li key={list}>{list}</li>

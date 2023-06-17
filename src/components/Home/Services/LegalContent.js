@@ -22,7 +22,7 @@ function LegalContent({show, setShow}) {
                 <div key={service._id}>
               <FadeIn delay="delay-[0ms]">
               
-                  <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+                  <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">
                     {service.legalTitle}
                   </p>
                   <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
@@ -32,7 +32,7 @@ function LegalContent({show, setShow}) {
                   </ul>
               </FadeIn>
               <FadeIn delay="delay-[300ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.legalTitle2}</p>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle2}</p>
               <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
               {JSON.parse(service.legalList2).map((list2) => (
                 <li key={list2}>{list2}</li>
@@ -40,7 +40,7 @@ function LegalContent({show, setShow}) {
               </ul>
               </FadeIn>
               <FadeIn delay="delay-[500ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{service.legalTitle3}</p>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle3}</p>
               <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
               {JSON.parse(service.legalList3).map((list3) => (
                 <li key={list3}>{list3}</li>

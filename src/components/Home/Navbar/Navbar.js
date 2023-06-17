@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import LegalContentNav from './LegalContentNav';
@@ -11,7 +11,6 @@ function Navbar() {
   const [show, setShow] = useState(false);
   const [showBus, setShowBus] = useState(false);
   const [showCont, setCont] = useState(false);
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
   function handleMenuClick() {
     setShowMenu(!showMenu);
@@ -19,22 +18,6 @@ function Navbar() {
     setShowBus(false);
     setCont(false);
   }
-
-  useEffect(() => {
-    let prevScrollPos = window.pageYOffset;
-
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setIsNavbarVisible(prevScrollPos > currentScrollPos);
-      prevScrollPos = currentScrollPos;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   const handleLegalConsultationClick = () => {
     setShow(!show);
@@ -49,7 +32,7 @@ function Navbar() {
   };
 
   return (
-    <nav className={`navbar ${isNavbarVisible ? '' : 'navbar--hidden'}`}>
+    <nav className='navbar'>
       <input type="checkbox" className="hamburger-menu" id="menu-toggle" checked={showMenu} onChange={handleMenuClick} />
       <label htmlFor="menu-toggle" className="hamburger-menu-label">
         <div className="hamburger-menu-icon"></div>

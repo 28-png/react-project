@@ -8,19 +8,62 @@ const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const AboutModel = require('./models/About.js');
 const ServicesModel = require('./models/Services.js');
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const UserModel = require('./models/User');
+const secretKey = '5420!!**Willor'
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const dbpass = process.env.DB_PASSWORD;
-
 app.use(bodyParser.json());
 app.use(cors());
-    
-mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mongodb.net/NCL?retryWrites=true&w=majority');
+
+mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mongodb.net/NCL?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.log('Failed to connect to MongoDB:', error);
+  });
+
+app.use(express.json());
 
 
+app.post('/api/admin/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Find the user by username
+    const user = await UserModel.findOne({ username });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+      
+    }
+
+    // Generate a JWT
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      secretKey, // Replace with your own secret key
+      { expiresIn: '1h' }
+    );
+
+    res.status(200).json({ token });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.get("/", (req, res) => {
   AboutModel.find({ })
@@ -53,7 +96,6 @@ function generateUniqueToken() {
 
 const acceptToken = generateUniqueToken();
 const denyToken = generateUniqueToken();
-
 
 
 const allowCrossDomain = (req, res, next) => {

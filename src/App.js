@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 // import Navbar from './components/Home/Navbar/Navbar';
 // import Services from './components/Home/Services/Services';
 // import Contact from './components/ContactAndServer/Contact';
@@ -9,10 +9,6 @@ import React, { useState } from 'react';
 // import Footer from './components/Home/Reusable-Assets/Footer';
 import Login from './components/ContactAndServer/Login';
 import { AuthProvider } from './components/ContactAndServer/Context/AuthProvider';
-
-
-
-
 
 function App() {
   // const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -59,9 +55,9 @@ function App() {
 
   return (
     <div>
-      <AuthProvider>
-      <Login />
-      </AuthProvider>
+       <AuthProvider>
+       <Login />
+       </AuthProvider>
       
       {/* <motion.section exit={{ opacity: 0 }}>
       <InitialTransition />
@@ -92,7 +88,7 @@ function App() {
          </div>
    </BrowserRouter>
    </motion.div>
-   </motion.section> */}
+   </motion.section>  */}
    </div>
    
   );
