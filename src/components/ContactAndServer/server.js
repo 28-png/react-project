@@ -11,6 +11,7 @@ const ServicesModel = require('./models/Services.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require('./models/User');
+const { use } = require('bcrypt/promises.js');
 const secretKey = '5420!!**Willor'
 
 const app = express();
@@ -33,7 +34,7 @@ mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mong
 app.use(express.json());
 
 
-app.post('/api/admin/login', async (req, res) => {
+app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {

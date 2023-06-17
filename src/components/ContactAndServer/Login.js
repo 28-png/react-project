@@ -1,9 +1,7 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import './Login.css';
 import AuthContext from './Context/AuthProvider';
 import axios from 'axios';
 
-const LOGIN_URL = 'http://localhost:3001/api/admin/login';
 
 const Login = () => {
   const { setAuth } = useContext(AuthContext);
@@ -15,6 +13,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
 
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -23,76 +22,89 @@ const Login = () => {
     setErrMsg('');
   }, [user, pwd]);
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await axios.post(LOGIN_URL, { username: user, password: pwd });
+      const response = await axios.post('http://localhost:3001/admin/login', { username: user, password: pwd });
+      const { token } = response.data;
 
-        const { token } = response.data;
-
-        // Handle successful login
-        setSuccess(true);
-        setAuth({ token }); // Set the token in the AuthContext
+      // Handle successful login
+      setSuccess(true);
+      setAuth({ token }); // Set the token in the AuthContext
     } catch (error) {
-        if (error.response) {
-            // Request was made and server responded with an error status
-            setErrMsg(error.response.data.error);
-        } else {
-            // Something went wrong with the request (e.g., network error)
-            setErrMsg('An error occurred. Please try again later.');
-        }
+      if (error.response) {
+        // Request was made and server responded with an error status
+        setErrMsg(error.response.data.error);
+      } else {
+        // Something went wrong with the request (e.g., network error)
+        setErrMsg('An error occurred. Please try again later.');
+      }
     }
-};
+  };
 
   return (
-    <>
-      {success ? (
-        <section>
-          <h1>You are logged in!</h1>
-          <br />
-          <p>
-            <a href='#'>Go to Home</a>
-          </p>
-        </section>
-      ) : (
-        <section>
-          <p ref={errRef} className={errMsg ? 'errMsg' : 'offScreen'} aria-live='assertive'>
-            {errMsg}
-          </p>
-          <h2>Sign In</h2>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor='username'>Username</label>
-            <input
-              type='text'
-              id='username'
-              ref={userRef}
-              autoComplete='off'
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              id='password'
-              autoComplete='off'
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-md p-6">
+        {success ? (
+          <section>
+            <h1>You are logged in!</h1>
+            <br />
+            <p>
+              <a href="#">Go to Home</a>
+            </p>
+          </section>
+        ) : (
+          <section>
+            <p ref={errRef} className={errMsg ? 'errMsg' : 'offScreen'} aria-live="assertive">
+              {errMsg}
+            </p>
+            <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="username" className="block font-semibold mb-1">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setUser(e.target.value)}
+                  value={user}
+                  required
+                  className="border border-gray-300 px-3 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="block font-semibold mb-1">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  autoComplete="off"
+                  onChange={(e) => setPwd(e.target.value)}
+                  value={pwd}
+                  required
+                  className="border border-gray-300 px-3 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
 
-            <button>Sign In</button>
-          </form>
-          <p>
-            Need to reset password?<br />
-            <span className='line'>
-              <a href='#'>Reset Here</a>
-            </span>
-          </p>
-        </section>
-      )}
-    </>
+              <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                Sign In
+              </button>
+            </form>
+            <p className="text-sm text-center mt-4">
+              Need to reset password?{' '}
+              <a href="#" className="text-blue-500 hover:underline">
+                Reset Here
+              </a>
+            </p>
+          </section>
+        )}
+      </div>
+    </div>
   );
 };
 
