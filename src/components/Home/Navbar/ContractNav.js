@@ -22,17 +22,21 @@ function ContractNav({showCont, setCont}) {
                 <SlideOverLayer>
             <FadeIn delay="delay-[0ms]">
             <div className="p-5">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-600">{service.contHeader}</h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.contBody}</p>
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-600">{service.contractHeader}</h5>
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.contractBody}</p>
               </div>
             </FadeIn>
             <FadeIn delay="delay-[300ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.contTitle}</p>
+              {service.contractAreas.map((area) => (
+              <div key={area.title}>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{area.title}</p>
               <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-              {JSON.parse(service.contList).map((list) => (
-                  <li key={list}>{list}</li>
+              {area.list.map((item) => (
+                <li key={item}>{item}</li>
               ))}
               </ul>
+              </div>
+                ))}
               </FadeIn>
               <div className="my-6">
             <FadeIn delay="delay-[500ms]">

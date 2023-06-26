@@ -1,18 +1,23 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from './Context/AuthProvider';
+import useAuth from './UseAuth';
 import axios from 'axios';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const userRef = useRef();
   const errRef = useRef();
 
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
-
 
   useEffect(() => {
     userRef.current.focus();
@@ -23,38 +28,30 @@ const Login = () => {
   }, [user, pwd]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await axios.post('http://localhost:3001/admin/login', { username: user, password: pwd });
-      const { token } = response.data;
-
-      // Handle successful login
-      setSuccess(true);
-      setAuth({ token }); // Set the token in the AuthContext
-    } catch (error) {
-      if (error.response) {
-        // Request was made and server responded with an error status
-        setErrMsg(error.response.data.error);
-      } else {
-        // Something went wrong with the request (e.g., network error)
-        setErrMsg('An error occurred. Please try again later.');
-      }
+  try {
+    const response = await axios.post('http://localhost:3001/admin/login', { username: user, password: pwd });
+    const { token, user: userData, isAdmin } = response.data;
+    
+    // Handle successful login
+    navigate(from, { replace: true })
+    setAuth({ token, user: userData, isAdmin }); // Set the token in the AuthContext
+  } catch (error) {
+    if (error.response) {
+      // Request was made and server responded with an error status
+      setErrMsg(error.response.data.error);
+    } else {
+      // Something went wrong with the request (e.g., network error)
+      setErrMsg('An error occurred. Please try again later.');
     }
-  };
+  }
+};
+
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-md p-6">
-        {success ? (
-          <section>
-            <h1>You are logged in!</h1>
-            <br />
-            <p>
-              <a href="#">Go to Home</a>
-            </p>
-          </section>
-        ) : (
           <section>
             <p ref={errRef} className={errMsg ? 'errMsg' : 'offScreen'} aria-live="assertive">
               {errMsg}
@@ -102,7 +99,7 @@ const Login = () => {
               </a>
             </p>
           </section>
-        )}
+
       </div>
     </div>
   );

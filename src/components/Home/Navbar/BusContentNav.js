@@ -21,17 +21,21 @@ function BusContentNav({showBus, setShowBus}) {
                 <SlideOverLayer>
             <FadeIn delay="delay-[0ms]">
             <div className="p-5">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-600">{service.busHeader}</h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.busBody}</p>
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-600">{service.businessHeader}</h5>
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.businessBody}</p>
               </div>
             </FadeIn>
               <FadeIn delay="delay-[300ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.busTitle}</p>
+                {service.businessAreas.map((area) => (
+                <div key={area.title}>
+              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{area.title}</p>
               <ul className="flex-col max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-              {JSON.parse(service.busList).map((list) => (
-                <li key={list}>{list}</li>
+                  {area.list.map((item) => (
+                    <li key={item}>{item}</li>
                   ))}
               </ul>
+              </div>
+                ))}
               </FadeIn>
               <div className="my-6">
             <FadeIn delay="delay-[300ms]">

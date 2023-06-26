@@ -26,20 +26,24 @@ function Contract() {
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img className="rounded-t-lg" src={photo3} alt="" />
                     <div className="p-5">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{service.contHeader}</h5>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.contBody}</p>
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{service.contracttHeader}</h5>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.contractBody}</p>
                     </div>
                     <div className="p-5">
                         <Transition.Root key="contract-transition" show={show}>
                             <BackgroundLayer />
                             <SlideOverLayer>
                                 <FadeIn delay="delay-[0ms]">
-                                    <p className="mb-2 text-lg font-semibold text-gray-900">{service.contTitle}</p>
+                                    {service.businessAreas.map((area) => (
+                                        <div key={area.title}>
+                                    <p className="mb-2 text-lg font-semibold text-gray-900">{area.title}</p>
                                     <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                                    {JSON.parse(service.contList).map((list) => (
-                                        <li key={list}>{list}</li>
+                                    {area.list.map((item) => (
+                                    <li key={item}>{item}</li>
                                     ))}
                                     </ul>
+                                    </div>
+                                    ))}
                                 </FadeIn>
                                 <div className="my-6">
                                     <FadeIn delay="delay-[300ms]">

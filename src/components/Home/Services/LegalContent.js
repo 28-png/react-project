@@ -5,7 +5,7 @@ import BackgroundLayer from '../Reusable-Assets/Background';
 import FadeIn from '../Animations/FadeIn';
 import Button from '../Reusable-Assets/Button';
 
-function LegalContent({show, setShow}) {
+function LegalContent({ show, setShow }) {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -13,50 +13,37 @@ function LegalContent({show, setShow}) {
       setServices(response.data);
     });
   }, []);
-      
-    return (
-        <div>   
-            <BackgroundLayer />
-                <SlideOverLayer>
-                {services.map((service) => (
-                <div key={service._id}>
-              <FadeIn delay="delay-[0ms]">
-              
+
+  return (
+    <div>
+      <BackgroundLayer />
+      <SlideOverLayer>
+        {services.map((service) => (
+          <div key={service._id}>
+            <FadeIn delay="delay-[0ms]">
+              {service.legalAreas.map((area) => (
+                <div key={area.title}>
                   <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">
-                    {service.legalTitle}
+                    {area.title}
                   </p>
                   <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                  {JSON.parse(service.legalList).map((list) => (
-                    <li key={list}>{list}</li>
-                  ))}
+                    {area.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ul>
-              </FadeIn>
-              <FadeIn delay="delay-[300ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle2}</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-              {JSON.parse(service.legalList2).map((list2) => (
-                <li key={list2}>{list2}</li>
-                ))}
-              </ul>
-              </FadeIn>
-              <FadeIn delay="delay-[500ms]">
-              <p className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-600">{service.legalTitle3}</p>
-              <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-              {JSON.parse(service.legalList3).map((list3) => (
-                <li key={list3}>{list3}</li>
-                ))}
-              </ul>
-              </FadeIn>
-              <div className="my-6">
-            <FadeIn delay="delay-[900ms]">
-              <Button onClick={() => setShow(false)}>Close</Button>
-            </FadeIn>
-          </div>
-          </div>
+                </div>
               ))}
-              </SlideOverLayer>
-        </div>
-    );
+            </FadeIn>
+            <div className="my-6">
+              <FadeIn delay="delay-[900ms]">
+                <Button onClick={() => setShow(false)}>Close</Button>
+              </FadeIn>
+            </div>
+          </div>
+        ))}
+      </SlideOverLayer>
+    </div>
+  );
 }
 
 export default LegalContent;

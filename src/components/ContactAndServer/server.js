@@ -11,8 +11,7 @@ const ServicesModel = require('./models/Services.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require('./models/User');
-const { use } = require('bcrypt/promises.js');
-const secretKey = '5420!!**Willor'
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -31,6 +30,14 @@ mongoose.connect('mongodb+srv://matthew28:GQH3Jsylvd4GTIxe@cluster0.rityzgi.mong
     console.log('Failed to connect to MongoDB:', error);
   });
 
+app.use(
+  session({
+    secret: '9226430cd5355cf7d21b4eeef2ccb222f6bf30b877a5f8b07e089a5ab0ad59b0', 
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use(express.json());
 
 
@@ -40,6 +47,7 @@ app.post('/admin/login', async (req, res) => {
   try {
     // Find the user by username
     const user = await UserModel.findOne({ username });
+    
 
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
@@ -53,17 +61,81 @@ app.post('/admin/login', async (req, res) => {
       
     }
 
+    if(!user.isAdmin) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    req.session.userId = user._id;
+
     // Generate a JWT
     const token = jwt.sign(
       { userId: user._id, username: user.username },
-      secretKey, // Replace with your own secret key
+      '9226430cd5355cf7d21b4eeef2ccb222f6bf30b877a5f8b07e089a5ab0ad59b0', // Replace with your own secret key
       { expiresIn: '1h' }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, user: { username: user.username }, isAdmin: user.isAdmin });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// Assuming you have already set up your Express server and routes
+
+// Update a business area within a service
+app.put('/services/:_id', (req, res) => {
+  const { _id } = req.params;
+  const { businessHeader } = req.body;
+
+  try {
+    ServicesModel.findByIdAndUpdate(
+      { _id },
+      { $set: { businessHeader } },
+      { new: true, useFindAndModify: false }
+    )
+      .then((updatedService) => {
+        if (!updatedService) {
+          return res.status(404).json({ error: 'Service not found' });
+        }
+        return res.json({ message: 'Service title updated successfully'});
+        
+      })
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: 'Invalid serviceId' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+app.get('/Admin/Dashboard', (req, res) => {
+  // Check if user is logged in by verifying the presence of userId in session
+  if (!req.session.userId) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  // Fetch additional user data or perform authorized actions here
+  // ...
+
+  res.status(200).json({ message: 'Welcome to the dashboard' });
+});
+
+// Logout route
+app.post('/admin/logout', (req, res) => {
+  // Destroy the session and log the user out
+  req.session.destroy();
+  res.status(200).json({ message: 'Logout successful' });
 });
 
 app.get("/", (req, res) => {

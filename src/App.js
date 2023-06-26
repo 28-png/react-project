@@ -9,6 +9,11 @@ import { motion } from "framer-motion";
 import Footer from './components/Home/Reusable-Assets/Footer';
 import Login from './components/ContactAndServer/Login';
 import { AuthProvider } from './components/ContactAndServer/Context/AuthProvider';
+import Layout from './components/Home/Layout';
+
+
+
+
 
 function App() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -56,9 +61,6 @@ function App() {
   return (
     <div>
        <AuthProvider>
-       
-       
-      
       <motion.section exit={{ opacity: 0 }}>
       <InitialTransition />
       <motion.div
@@ -73,15 +75,14 @@ function App() {
        <Navbar />
        </motion.section>
         <Routes>
+          <Route element={<Layout/>} path="/">
           <Route path='/login' element={<Login />} />
-          <Route 
-             path="/contact"
-             element={<Contact handlePopupOpen={handlePopupOpen} />}
-          />
-         </Routes>
+          <Route path='/contact'  element={<Contact handlePopupOpen={handlePopupOpen} />} />
          {isPopupVisible && (
            <PopupBox message={popupMessage} onClose={handlePopupClose} />
          )}
+         </Route>
+         </Routes>
          <motion.section variants={services} key="services">
          <Services />
           <Footer />
