@@ -5,6 +5,7 @@ import "../Services/Services.css";
 function CardForm() {
   const [services, setServices] = useState([]);
   const [updatedTitle, setUpdatedTitle] = useState("");
+  const [updatedBody, setUpdatedBody] = useState("");
 
   useEffect(() => {
     fetchServices();
@@ -13,6 +14,13 @@ function CardForm() {
   const fetchServices = () => {
     axios.get("http://localhost:3001/services").then((response) => {
       setServices(response.data);
+      if (response.data.length > 0) {
+        setUpdatedBody(response.data[0].businessBody);
+      }
+
+      if (response.data.length > 0) {
+        setUpdatedTitle(response.data[0].businessHeader);
+      }
     });
   };
 
@@ -30,13 +38,36 @@ function CardForm() {
       });
   };
 
-  const handleInputChange = (e) => {
+  const updateServiceBody = (_id, updatedBody) => {
+    axios
+      .put(`http://localhost:3001/services/${_id}`, {
+        businessBody: updatedBody,
+      })
+      .then(() => {
+        console.log("Service Body updated successfully");
+        fetchServices(); // Refresh the services data after successful update
+      })
+      .catch((error) => {
+        console.error("Error updating service Body:", error);
+      });
+  };
+
+  const handleTitleInputChange = (e) => {
     setUpdatedTitle(e.target.value);
   };
 
-  const handleSubmit = (_id) => {
+  const handleBodyInputChange = (e) => {
+    setUpdatedBody(e.target.value);
+  };
+
+  const handleTitleSubmit = (_id) => {
     updateServiceTitle(_id, updatedTitle);
     setUpdatedTitle("");
+  };
+
+  const handleBodySubmit = (_id) => {
+    updateServiceBody(_id, updatedBody);
+    setUpdatedBody("");
   };
 
   return (
@@ -50,22 +81,55 @@ function CardForm() {
                   {service.businessHeader}
                 </h5>
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Updating Title:
+                  Update Title:
                 </h5>
                 <form onSubmit={(e) => e.preventDefault()} className="mb-2">
                   <input
                     type="text"
                     value={updatedTitle}
-                    onChange={handleInputChange}
+                    onChange={handleTitleInputChange}
                     className="text-xl font-semibold text-gray-700 border-b border-gray-300 focus:outline-none focus:border-blue-600"
                   />
                   <button
                     type="submit"
-                    onClick={() => handleSubmit(service._id)}
+                    onClick={() => handleTitleSubmit(service._id)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
                   >
                     Submit
                   </button>
+                </form>
+                
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{service.businessBody}</p>
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  Update Description:
+                </h5>
+                <form onSubmit={(e) => e.preventDefault()} className="mb-2">
+                  <textarea
+                    type="text"
+                    value={updatedBody}
+                    onChange={handleBodyInputChange}
+                    className="text-xl font-semibold text-gray-700 border-b border-gray-300 focus:outline-none focus:border-blue-600"
+                  />
+                  <button
+                    type="submit"
+                    onClick={() => handleBodySubmit(service._id)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                  >
+                    Submit
+                  </button>
+                </form>
+                {service.businessAreas.map((area) => (
+                    <div key={area.title}>
+                <p className="mb-2 text-lg font-semibold text-gray-200">{area.title}</p>
+                <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                    {area.list.map((item) => (
+                        <li key={item}>{item}</li>
+                    ))}
+                </ul>
+                </div>
+                ))}
+                <form>
+                  
                 </form>
               </div>
             </div>

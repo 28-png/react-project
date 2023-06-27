@@ -12,6 +12,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require('./models/User');
 const session = require('express-session');
+const TestimonialModel = require('./models/Testimonies.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -85,12 +86,12 @@ app.post('/admin/login', async (req, res) => {
 // Update a business area within a service
 app.put('/services/:_id', (req, res) => {
   const { _id } = req.params;
-  const { businessHeader } = req.body;
+  const { businessHeader, businessBody } = req.body;
 
   try {
     ServicesModel.findByIdAndUpdate(
       { _id },
-      { $set: { businessHeader } },
+      { $set: { businessHeader, businessBody } },
       { new: true, useFindAndModify: false }
     )
       .then((updatedService) => {
@@ -109,13 +110,6 @@ app.put('/services/:_id', (req, res) => {
     res.status(400).json({ error: 'Invalid serviceId' });
   }
 });
-
-
-
-
-
-
-
 
 
 
@@ -150,6 +144,16 @@ app.get("/", (req, res) => {
 
 app.get("/services", (req, res) => {
   ServicesModel.find({ })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.get("/Testimony", (req, res) => {
+  TestimonialModel.find({ })
     .then((result) => {
       res.json(result);
     })

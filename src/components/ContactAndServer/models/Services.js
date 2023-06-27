@@ -9,7 +9,7 @@ const ServicesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  businessDescription: {
+  businessBody: {
     type: String,
     required: true,
   },

@@ -1,26 +1,14 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 function TestimonialSection() {
-  const testimonials = [
-    {
-      id: 1,
-      name: "John Doe",
-      testimonial:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur dui nec finibus aliquam. Phasellus fermentum risus a eros euismod, id facilisis ligula tincidunt.",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      testimonial:
-        "Pellentesque feugiat ante vitae ante congue, ut blandit est commodo. Integer accumsan vestibulum ipsum, et suscipit arcu consequat a.",
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      testimonial:
-        "Nullam nec sem nec risus rutrum fringilla. Maecenas et mi in tortor scelerisque fringilla. Curabitur at erat consectetur, vulputate ligula et, aliquet turpis.",
-    },
-  ];
+  const [testimonials, setTestimonials] = useState([])
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/Testimony").then((response) => {
+      setTestimonials(response.data);
+    });
+  }, []);
 
   return (
     <div className="bg-gray-100 py-16 sm:py-24">
@@ -35,30 +23,34 @@ function TestimonialSection() {
         </div>
         <div className="mt-16">
           <div className="max-w-lg mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:max-w-none">
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimony) => (
               <div
-                key={testimonial.id}
+                key={testimony._id}
                 className="rounded-lg shadow-lg bg-white overflow-hidden transition duration-300 transform hover:-translate-y-1 hover:scale-105"
               >
+                {testimony.testimonies.map((area) => (
+                  <div key={area.testimonyId}>
                 <div className="p-6 flex flex-col justify-between h-full">
                   <div>
-                    <p className="text-gray-500">{testimonial.testimonial}</p>
+                    <p className="text-gray-500">{area.description}</p>
                   </div>
                   <div className="flex justify-end mt-4">
                     <p className="text-sm font-medium text-gray-900">
-                      {testimonial.name}
+                      {area.name}
                     </p>
                   </div>
                 </div>
                 <div className="bg-blue-500 px-6 py-4">
                   <div className="flex justify-between items-center">
-                    <div>
+                    {/* <div>
                       <p className="text-sm font-medium text-white">
-                        {testimonial.name}
+                        {area.name}
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
+                </div>
+                ))}
               </div>
             ))}
           </div>
