@@ -5,7 +5,7 @@ function TestimonialSection() {
   const [testimonials, setTestimonials] = useState([])
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/Testimony").then((response) => {
+    Axios.get("http://localhost:3001/Testimonials").then((response) => {
       setTestimonials(response.data);
     });
   }, []);
@@ -42,11 +42,6 @@ function TestimonialSection() {
                 </div>
                 <div className="bg-blue-500 px-6 py-4">
                   <div className="flex justify-between items-center">
-                    {/* <div>
-                      <p className="text-sm font-medium text-white">
-                        {area.name}
-                      </p>
-                    </div> */}
                   </div>
                 </div>
                 </div>

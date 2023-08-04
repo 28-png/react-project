@@ -1,22 +1,9 @@
 const mongoose = require('mongoose');
 
-const ServicesSchema = new mongoose.Schema({
+const BusinessAreaSchema = new mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     auto: true,
-  },
-  businessHeader: {
-    type: String,
-    required: true,
-  },
-  businessBody: {
-    type: String,
-    required: true,
-  },
-  serviceId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    unique: true,
   },
   title: {
     type: String,
@@ -28,6 +15,18 @@ const ServicesSchema = new mongoose.Schema({
   },
 });
 
-const ServicesModel = mongoose.model("Services", ServicesSchema, "Services");
+const ServicesSchema = new mongoose.Schema({
+  businessHeader: {
+    type: String,
+    required: true,
+  },
+  businessBody: {
+    type: String,
+    required: true,
+  },
+  businessAreas: [BusinessAreaSchema],
+});
+
+const ServicesModel = mongoose.model('Services', ServicesSchema, 'Services');
 
 module.exports = ServicesModel;

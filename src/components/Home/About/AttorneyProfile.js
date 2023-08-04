@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import React from "react";
 import photo from '../../../assets/lawyer-img.jpg';
-import { Route, Routes } from 'react-router-dom';
-import RequireAuth from '../../ContactAndServer/RequireAuth';
 import useAuth from '../../ContactAndServer/UseAuth';
-import AttorneyForm from "../Forms/AttorneyForm";
+
 
 function AttorneyProfile() {
   const [about, setAbout] = useState([]);
@@ -17,16 +15,13 @@ function AttorneyProfile() {
   }, []);
 
   return (
+    <div>
+      {!auth.user && (
+                <>
     <div className="bg-gray-100">
       <div className="container mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
-        <Routes>
-            <Route element={<RequireAuth isAdmin={true} />}>
-              <Route element={<AttorneyForm />} path="Admin/Dashboard" />
-            </Route>
-          </Routes>
-        {!auth.user && (
-                <>
+        
           {about.map((aboutData) => {
             return (
               <div key={aboutData._id}>
@@ -37,8 +32,7 @@ function AttorneyProfile() {
               </div>
             );
           })}
-           </>
-          )}
+           
           <div className="mt-12 lg:mt-0">
             <div className="max-w-md mx-auto sm:max-w-lg lg:ml-auto lg:max-w-none lg:w-96">
               <div className="aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
@@ -48,6 +42,9 @@ function AttorneyProfile() {
           </div>
         </div>
       </div>
+    </div>
+    </>
+          )}
     </div>
   );
 }

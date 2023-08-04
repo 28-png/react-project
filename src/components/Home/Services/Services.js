@@ -8,12 +8,10 @@ import Contract from "./Contract";
 import AttorneyProfile from "../About/AttorneyProfile";
 import TestimonialForm from "../Testimonial/TestimonialForm";
 import TestimonialSection from "../Testimonial/TestimonialSection";
-import LandingForm from "../Forms/LandingForm";
 import { Route, Routes } from 'react-router-dom';
 import RequireAuth from '../../ContactAndServer/RequireAuth';
 import useAuth from '../../ContactAndServer/UseAuth';
-import MissionForm from "../Forms/MissionForm";
-import CardForm from "../Forms/CardForm";
+import TestimonialForms from "../Forms/TestimonialForm";
 
 function Services() {
   const [about, setAbout] = useState([]);
@@ -33,15 +31,11 @@ function Services() {
   return (
     <div>
       <main>
+      {!auth.user && (
+            <>
         <section className="hero">
           <div className="container">
-          <Routes>
-            <Route element={<RequireAuth isAdmin={true} />}>
-              <Route element={<LandingForm />} path="Admin/Dashboard" />
-            </Route>
-          </Routes>
-          {!auth.user && (
-            <>
+          
               {about.map((aboutItem) => (
                 <div key={aboutItem._id}>
                   <h1>{aboutItem.landingTitle}</h1>
@@ -49,16 +43,12 @@ function Services() {
                 </div>
               ))}
               <button onClick={scrollToServices}>Learn More</button>
-            </>
-          )}
+           
           </div>
         </section>
+        </>
+        )}
         <div className="mission-container">
-        <Routes>
-            <Route element={<RequireAuth isAdmin={true} />}>
-              <Route element={<MissionForm />} path="Admin/Dashboard" />
-            </Route>
-          </Routes>
           {!auth.user && (
             <>
           {about.map((aboutItem) => (
@@ -70,30 +60,39 @@ function Services() {
            </>
          )}
         </div>
+        {!auth.user && (
+            <>
         <AboutUs key="about-us" />
         <AttorneyProfile key="attorney-profile" />
         <section id="services-section" className="services">
           <div className="container">
-          {!auth.user && (
-            <>
+          
             <h2>Our Services</h2>
             <div className="service-items">
               <Legal key="legal" />
               <Business key="business" />
               <Contract key="contract" />
             </div>
-            </>
-         )}
-            <Routes>
-            <Route element={<RequireAuth isAdmin={true} />}>
-              <Route element={<CardForm />} path="Admin/Dashboard" />
-            </Route>
-          </Routes>
+           
           </div>
         </section>
+        </>
+        )}
       </main>
+      <Routes>
+            <Route element={<RequireAuth isAdmin={true} />}>
+              <Route element={<TestimonialForms />} path="Admin/Dashboard" />
+            </Route>
+          </Routes>
+      
+      {!auth.user && (
+            <>
+      <div>
       <TestimonialSection key="testimonial-section" />
       <TestimonialForm key="testimonial-form" />
+      </div>
+      </>
+        )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const twilio = require('twilio');
 const { v4: uuidv4 } = require('uuid');
-const mongoose = require('mongoose');
+const { mongoose, Types } = require('mongoose');
 const AboutModel = require('./models/About.js');
 const ServicesModel = require('./models/Services.js');
 const bcrypt = require('bcrypt');
@@ -81,24 +81,21 @@ app.post('/admin/login', async (req, res) => {
   }
 });
 
-// Assuming you have already set up your Express server and routes
-
-// Update a business area within a service
-app.put('/services/:_id', (req, res) => {
-  const { _id } = req.params;
-  const { businessHeader, businessBody } = req.body;
+app.put('/Testimonials/:testimonyId', (req, res) => {
+  const { testimonyId } = req.params;
+  const { name, description } = req.body;
 
   try {
     ServicesModel.findByIdAndUpdate(
-      { _id },
-      { $set: { businessHeader, businessBody } },
+      { testimonyId },
+      { $set: { name, description } },
       { new: true, useFindAndModify: false }
     )
-      .then((updatedService) => {
-        if (!updatedService) {
-          return res.status(404).json({ error: 'Service not found' });
+      .then((updatedTestimony) => {
+        if (!updatedTestimony) {
+          return res.status(404).json({ error: 'Testimony not found' });
         }
-        return res.json({ message: 'Service title updated successfully'});
+        return res.json({ message: 'Testimony updated successfully'});
         
       })
       .catch((error) => {
@@ -107,10 +104,9 @@ app.put('/services/:_id', (req, res) => {
       });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error: 'Invalid serviceId' });
+    res.status(400).json({ error: 'Invalid testimonyId' });
   }
 });
-
 
 
 app.get('/Admin/Dashboard', (req, res) => {
@@ -152,7 +148,7 @@ app.get("/services", (req, res) => {
     });
 });
 
-app.get("/Testimony", (req, res) => {
+app.get("/Testimonials", (req, res) => {
   TestimonialModel.find({ })
     .then((result) => {
       res.json(result);
@@ -161,8 +157,6 @@ app.get("/Testimony", (req, res) => {
       res.json(err);
     });
 });
-
-
 
 dotenv.config();
 

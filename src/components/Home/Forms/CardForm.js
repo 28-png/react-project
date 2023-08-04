@@ -23,6 +23,7 @@ function CardForm() {
       }
     });
   };
+  
 
   const updateServiceTitle = (_id, updatedTitle) => {
     axios
@@ -117,19 +118,6 @@ function CardForm() {
                   >
                     Submit
                   </button>
-                </form>
-                {service.businessAreas.map((area) => (
-                    <div key={area.title}>
-                <p className="mb-2 text-lg font-semibold text-gray-200">{area.title}</p>
-                <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                    {area.list.map((item) => (
-                        <li key={item}>{item}</li>
-                    ))}
-                </ul>
-                </div>
-                ))}
-                <form>
-                  
                 </form>
               </div>
             </div>
