@@ -2,12 +2,17 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 
 function TestimonialSection() {
-  const [testimonials, setTestimonials] = useState([])
+  const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/Testimonials").then((response) => {
-      setTestimonials(response.data);
-    });
+    Axios.get("http://localhost:3001/Testimonials")
+      .then((response) => {
+        console.log(response.data); // Check the structure of data received
+        setTestimonials(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching testimonials:", error);
+      });
   }, []);
 
   return (
@@ -23,31 +28,17 @@ function TestimonialSection() {
         </div>
         <div className="mt-16">
           <div className="max-w-lg mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:max-w-none">
-            {testimonials.map((testimony) => (
-              <div
-                key={testimony._id}
-                className="rounded-lg shadow-lg bg-white overflow-hidden transition duration-300 transform hover:-translate-y-1 hover:scale-105"
-              >
-                {testimony.testimonies.map((area) => (
-                  <div key={area.testimonyId}>
-                <div className="p-6 flex flex-col justify-between h-full">
-                  <div>
-                    <p className="text-gray-500">{area.description}</p>
-                  </div>
-                  <div className="flex justify-end mt-4">
-                    <p className="text-sm font-medium text-gray-900">
-                      {area.name}
-                    </p>
-                  </div>
+            {testimonials.map((testimony) =>
+              testimony.testimonies.map((area) => (
+                <div
+                  key={area.testimonyId}
+                  className="border rounded-lg bg-white shadow-md p-4"
+                >
+                  <p className="text-gray-500 mb-4">{area.description}</p>
+                  <p className="text-sm font-medium text-gray-900">{area.name}</p>
                 </div>
-                <div className="bg-blue-500 px-6 py-4">
-                  <div className="flex justify-between items-center">
-                  </div>
-                </div>
-                </div>
-                ))}
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

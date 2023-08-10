@@ -81,32 +81,75 @@ app.post('/admin/login', async (req, res) => {
   }
 });
 
-app.put('/Testimonials/:testimonyId', (req, res) => {
+app.put('/Testimonials/:testimonyId', async (req, res) => {
   const { testimonyId } = req.params;
   const { name, description } = req.body;
 
   try {
-    ServicesModel.findByIdAndUpdate(
-      { testimonyId },
-      { $set: { name, description } },
-      { new: true, useFindAndModify: false }
-    )
-      .then((updatedTestimony) => {
-        if (!updatedTestimony) {
-          return res.status(404).json({ error: 'Testimony not found' });
-        }
-        return res.json({ message: 'Testimony updated successfully'});
-        
-      })
-      .catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
+    const objectIdTestimonyId = new Types.ObjectId(testimonyId);
+    await TestimonialModel.findOneAndUpdate(
+      { 'testimonies.testimonyId': objectIdTestimonyId },
+      {
+        $set: {
+          'testimonies.$[elem].name': name,
+          'testimonies.$[elem].description': description,
+        },
+      },
+      {
+        arrayFilters: [{ 'elem.testimonyId': objectIdTestimonyId }],
+        new: true,
+        useFindAndModify: false,
+      }
+    );
+    
+    res.json({ message: 'Testimony updated successfully' });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error: 'Invalid testimonyId' });
+    res.status(400).json({ error: 'Invalid TestimonyId' });
   }
 });
+
+app.post('/Testimonials/add', async (req, res) => {
+  const { name, description } = req.body;
+
+  try {
+    const newTestimonial = {
+      testimonyId: new Types.ObjectId(),
+      name,
+      description,
+    };
+
+    await TestimonialModel.findOneAndUpdate(
+      {},
+      { $push: { testimonies: newTestimonial } },
+      { new: true, useFindAndModify: false }
+    );
+
+    res.json({ message: 'Testimonial added successfully', newTestimonial });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error adding testimonial' });
+  }
+});
+
+app.delete("/Testimonials/delete/:testimonyId", async (req, res) => {
+  try {
+    const deletedTestimonial = await TestimonialModel.findOneAndUpdate(
+      {},
+      { $pull: { testimonies: { testimonyId: req.params.testimonyId } } },
+      { new: true }
+    );
+
+    if (!deletedTestimonial) {
+      return res.status(404).json({ error: "Testimonial not found." });
+    }
+
+    res.json({ deletedTestimonial });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete testimonial." });
+  }
+});
+
 
 
 app.get('/Admin/Dashboard', (req, res) => {
@@ -149,7 +192,7 @@ app.get("/services", (req, res) => {
 });
 
 app.get("/Testimonials", (req, res) => {
-  TestimonialModel.find({ })
+  TestimonialModel.find({})
     .then((result) => {
       res.json(result);
     })
@@ -157,6 +200,8 @@ app.get("/Testimonials", (req, res) => {
       res.json(err);
     });
 });
+
+
 
 dotenv.config();
 
