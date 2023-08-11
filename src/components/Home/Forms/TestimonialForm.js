@@ -45,14 +45,20 @@ function TestimonialForm() {
     };
 
     const cancelEditMode = (testimonyId, fieldName) => {
-      toggleEditMode(testimonyId, fieldName);
       // Reset the input fields if needed
       if (fieldName === "name") {
-        setClientName(""); // Reset the updatedClientName state
+        setClientName(getTestimonyName(testimonyId)); // Revert to the original name
       } else if (fieldName === "description") {
-        setTestimonyDescription(""); // Reset the updatedTestimonyDescription state
+        setTestimonyDescription(getTestimonyDescription(testimonyId)); // Revert to the original description
       }
+    
+      // Cancel edit mode
+      setEditMode((prevEditMode) => ({
+        ...prevEditMode,
+        [testimonyId]: null, // Reset edit mode for the specific testimony
+      }));
     };
+    
   
     // Function to get the current testimony name based on testimonyId
     const getTestimonyName = (testimonyId) => {
@@ -223,9 +229,9 @@ const updateTestimonyDescription = (testimonyId, updatedTestimonyDescription) =>
                       </div>
                       <div className="p-6 m-10">
                         <p className="text-gray-500 text-center">{area.description}</p>
-                        {editMode[area.testimonyId] ? (
+                        {/* Edit mode for description */}
+                        {editMode[area.testimonyId] === "description" ? (
                           <form onSubmit={(e) => e.preventDefault()} className="mb-2">
-                            {/* Input fields for editing */}
                             <textarea
                               type="text"
                               value={updatedTestimonyDescription}
@@ -237,7 +243,47 @@ const updateTestimonyDescription = (testimonyId, updatedTestimonyDescription) =>
                               onClick={() => updateTestimonyDescription(area.testimonyId, updatedTestimonyDescription)}
                               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
                             >
-                              Submit
+                              Submit Description
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => cancelEditMode(area.testimonyId, "description")}
+                              className="bg-gray-300 hover:bg-gray-500 text-gray-900 font-bold py-2 px-4 rounded mt-2 ml-2"
+                            >
+                              Cancel
+                            </button>
+                          </form>
+                        ) : (
+                          <div>
+                            {/* Non-edit mode content for description */}
+                            <button
+                              type="button"
+                              onClick={() => toggleEditMode(area.testimonyId, "description")}
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                            >
+                              Edit Description
+                            </button>
+                            <p className="text-lg font-medium text-gray-900 text-center">
+                              {area.description}
+                            </p>
+                          </div>
+                        )}
+    
+                        {/* Edit mode for name */}
+                        {editMode[area.testimonyId] === "name" ? (
+                          <form onSubmit={(e) => e.preventDefault()} className="mb-2">
+                            <input
+                              type="text"
+                              value={updatedClientName}
+                              onChange={handleClientNameChange}
+                              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            />
+                            <button
+                              type="submit"
+                              onClick={() => updateClientName(area.testimonyId, updatedClientName)}
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                            >
+                              Submit Name
                             </button>
                             <button
                               type="button"
@@ -249,44 +295,27 @@ const updateTestimonyDescription = (testimonyId, updatedTestimonyDescription) =>
                           </form>
                         ) : (
                           <div>
-                            {/* Non-edit mode content, including "Edit" button */}
+                            {/* Non-edit mode content for name */}
                             <button
                               type="button"
-                              onClick={() => toggleEditMode(area.testimonyId)}
+                              onClick={() => toggleEditMode(area.testimonyId, "name")}
                               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
                             >
-                              Edit
+                              Edit Name
                             </button>
-                            {/* Display non-edit mode content */}
                             <p className="text-lg font-medium text-gray-900 text-center">
                               {area.name}
                             </p>
-                            <form onSubmit={(e) => e.preventDefault()} className="mb-2">
-                              <div className="flex justify-end mt-4">
-                                <input
-                                  type="text"
-                                  value={updatedClientName}
-                                  onChange={handleClientNameChange}
-                                  className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                              </div>
-                              <button
-                                type="submit"
-                                onClick={() => updateClientName(area.testimonyId, updatedClientName)}
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
-                              >
-                                Submit
-                              </button>
-                            </form>
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteTestimonial(area.testimonyId)}
-                              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
-                            >
-                              Delete Testimonial
-                            </button>
                           </div>
                         )}
+    
+                        <button
+                      type="button"
+                      onClick={() => handleDeleteTestimonial(area.testimonyId)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
+                    >
+                      Delete Testimonial
+                    </button>
                       </div>
                     </div>
                   ))}
